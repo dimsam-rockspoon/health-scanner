@@ -1,0 +1,87 @@
+{
+  "id": "6b756c5f-3abe-4031-9580-129206f66cff",
+  "patient_id": "PAT-20A8D30ECDC9",
+  "exam_type": "polysomnography",
+  "exam_code": "PSG",
+  "exam_name": "Polysomnography (Sleep Study)",
+  "collected_at": "2023-05-10",
+  "status": "FINAL",
+  "priority": "ROUTINE",
+  "location": {
+    "street": "Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200",
+    "country": "Brazil",
+    "name": "Fleury"
+  },
+  "result_summary": "Índice de apnéia-hipopnéia levemente aumentado (IAH= 7.1).; Ronco leve e intermitente.; Latências de sono e de sono REM aumentadas.; Redução do percentual do sono de ondas lentas e do sono REM.; Sono fragmentado por numerosos despertares e eficiência reduzida.",
+  "polysomnography_json": {
+    "equipment": "Alice PDX",
+    "monitoring_duration": {
+      "value": 499.2,
+      "unit": "minutes"
+    },
+    "start_time": "21:53:47",
+    "end_time": "06:12:59",
+    "electrophysiological_parameters": "EEG: C3-M2, C4-M1, O1-M2, O2-M1; EOG (E e D); EMG submentoniano e tibial anterior; sensor de ronco; fluxo aéreo (cânula de pressão nasal e termistor); cintas torácica e abdominal de padrão piezo-elétrico; detector de posição; oxímetro de pulso; ECG",
+    "total_registration_time": {
+      "value": 499.2,
+      "unit": "minutes"
+    },
+    "total_sleep_time": {
+      "value": 353.5,
+      "unit": "minutes"
+    },
+    "sleep_efficiency": {
+      "value": 73.6,
+      "unit": "%"
+    },
+    "sleep_distribution": {},
+    "sleep_latency": {
+      "value": 35.5,
+      "unit": "minutes"
+    },
+    "rem_sleep_latency": {
+      "value": 146.5,
+      "unit": "minutes"
+    },
+    "wakefulness_during_total_sleep_time": {
+      "value": 85.0,
+      "unit": "minutes"
+    },
+    "sleep_fragmentation": {
+      "microarousals": {
+        "count": 84
+      },
+      "complete_arousals": {
+        "count": 14
+      }
+    },
+    "periodic_limb_movements": "Não foram registrados.",
+    "respiratory_events_during_sleep": {
+      "obstructive_apneas": {
+        "count": 15
+      },
+      "hypopneas": {
+        "count": 27
+      }
+    },
+    "oxygen_saturation_sao2": {},
+    "snoring": "Leve, registrado durante o sono.",
+    "body_position": "Supina e lateral.",
+    "heart_rate": {
+      "average": {
+        "value": 58.5,
+        "unit": "bpm"
+      },
+      "arrhythmias": "Não foram observadas."
+    },
+    "conclusions": [
+      "Índice de apnéia-hipopnéia levemente aumentado (IAH= 7.1).",
+      "Ronco leve e intermitente.",
+      "Latências de sono e de sono REM aumentadas.",
+      "Redução do percentual do sono de ondas lentas e do sono REM.",
+      "Sono fragmentado por numerosos despertares e eficiência reduzida."
+    ]
+  },
+  "tags": [],
+  "sensitive": false
+}

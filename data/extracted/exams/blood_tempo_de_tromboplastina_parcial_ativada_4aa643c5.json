@@ -1,0 +1,43 @@
+{
+  "_id": "4aa643c5-7549-4cad-bbfb-e08c9aca6925",
+  "patient_id": "PAT-20A8D30ECDC9",
+  "exam_type": "blood",
+  "exam_code": "TEMPO DE TROMBOPLASTINA PARCIAL ATIVADA",
+  "exam_name": "TEMPO DE TROMBOPLASTINA PARCIAL ATIVADA, plasma",
+  "collected_at": "2023-06-21T00:00:00Z",
+  "reported_at": "2023-06-21 15:20",
+  "status": "final",
+  "priority": "routine",
+  "location": "Fleury",
+  "details": {
+    "method": "Coagulométrico",
+    "measurements": [
+      {
+        "name": "NORMAL DO DIA",
+        "value": "31,1",
+        "unit": "segundos",
+        "reference_range": null
+      },
+      {
+        "name": "NORMAL DO DIA",
+        "value": "28,8",
+        "unit": "segundos",
+        "reference_range": null
+      },
+      {
+        "name": "RELACAO PACIENTE/NORMAL",
+        "value": "1,08",
+        "unit": null,
+        "reference_range": {
+          "min": "0,91",
+          "max": "1,20"
+        }
+      }
+    ],
+    "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 4D8A1BBAFE8C5492BB87D299AFDC356A8B79CBDB034EA6B3203BB2466FF09F6C"
+  },
+  "performing_physician": {
+    "name": "DRA MARIA CAROLINA TOSTES PINTAO",
+    "crm": "91813SP"
+  }
+}

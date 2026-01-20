@@ -1,0 +1,708 @@
+{
+  "patient_info": {
+    "name": "RAPHAEL SCAFF RODRIGUES",
+    "date_of_birth": "1996-02-19",
+    "age": "27 anos",
+    "weight_kg": 85.0,
+    "height_m": 1.9
+  },
+  "physician_info": {
+    "referring_physician": "DR. DAPHNIS GONCALVES SOUZA",
+    "referring_physician_crm": "68846SP",
+    "responsible_technical_physician": "DR EDGAR GIL RIZZATTI",
+    "responsible_technical_physician_crm": "94199SP"
+  },
+  "facility_info": {
+    "name": "Fleury",
+    "address": "Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200",
+    "phone_gsp": "3179-0822 ou 30-FLEURY",
+    "phone_other_locations": "0800-704-0822",
+    "website": "www.fleury.com.br"
+  },
+  "exam_metadata": {
+    "record_number": "4602240020",
+    "exam_date": "2023-06-21",
+    "printed_date": "2025-12-30 11:07"
+  },
+  "exams": [
+    {
+      "exam_type": "CREATININA",
+      "test_name": "CREATININA, soro",
+      "method": "Cinético colorimétrico",
+      "result": "0,93",
+      "unit": "mg/dL",
+      "reference_range": {
+        "min": "0,70",
+        "max": "1,30",
+        "unit": "mg/dL",
+        "notes": "Masc: mais de 12 anos"
+      },
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 19:52",
+      "cnes": "3066746",
+      "responsible_professional": "DR NAIRO MASSAKAZU SUMITA",
+      "responsible_professional_crm": "61649SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 74C8A5BF43EC0D0032D4267D97E40E7A680513096232C412D2EE70BDAA12B15C"
+    },
+    {
+      "exam_type": "POTASSIO",
+      "test_name": "POTASSIO, soro",
+      "method": "Potenciométrico",
+      "result": "4,4",
+      "unit": "mEq/L",
+      "reference_range": {
+        "min": "3,5",
+        "max": "5,1",
+        "unit": "mEq/L",
+        "notes": "A partir de 1 ano"
+      },
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 20:36",
+      "cnes": "3066746",
+      "responsible_professional": "DR NAIRO MASSAKAZU SUMITA",
+      "responsible_professional_crm": "61649SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: F0213D3F1B63C57FB88B8A2EB156DCFBC27DD7D488EC941F74831A1030E10C75"
+    },
+    {
+      "exam_type": "SODIO",
+      "test_name": "SODIO, soro",
+      "method": "Potenciométrico",
+      "result": "142",
+      "unit": "mEq/L",
+      "reference_range": {
+        "min": "136",
+        "max": "145",
+        "unit": "mEq/L"
+      },
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 20:36",
+      "cnes": "3066746",
+      "responsible_professional": "DR NAIRO MASSAKAZU SUMITA",
+      "responsible_professional_crm": "61649SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 8B1FC0863335B20EF86F703A6149DA55E7AAEAFD7AF885CF0B7B51456890D801"
+    },
+    {
+      "exam_type": "UREIA",
+      "test_name": "UREIA, soro",
+      "method": "Cinético, UV",
+      "result": "38",
+      "unit": "mg/dL",
+      "reference_range": {
+        "min": "10",
+        "max": "50",
+        "unit": "mg/dL"
+      },
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 19:53",
+      "cnes": "3066746",
+      "responsible_professional": "DR NAIRO MASSAKAZU SUMITA",
+      "responsible_professional_crm": "61649SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 06634CE0FF7631E2CFEC0A031BBC51C9066AB1DBE44A2C825679C12C34DD464B"
+    },
+    {
+      "exam_type": "TEMPO DE PROTROMBINA",
+      "test_name": "TEMPO DE PROTROMBINA, plasma",
+      "method": "Coagulométrico",
+      "results": [
+        {
+          "test": "Tempo de Protrombina",
+          "result": "11,3",
+          "unit": "segundos",
+          "reference_range": {
+            "min": "10,1",
+            "max": "12,8",
+            "unit": "segundos"
+          }
+        },
+        {
+          "test": "INR",
+          "result": "1,0",
+          "reference_range": {
+            "min": "0,9",
+            "max": "1,1"
+          }
+        },
+        {
+          "test": "NORMAL DO DIA",
+          "result": "11,0",
+          "unit": "segundos"
+        }
+      ],
+      "isi_thromboplastin": "0,96",
+      "notes": [
+        "Recomenda-se o uso do INR (International Normalized Ratio) para monitorização de paciente em anticoagulação oral com antagonistas de vitamina K (AVKs). Para as demais situações clínicas, sugere-se o acompanhamento dos resultados expressos em segundos.",
+        "Para a maior parte das indicações de anticoagulação com AVKs, o intervalo terapêutico recomendado do INR é de 2,0 a 3,0."
+      ],
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 15:20",
+      "cnes": "3066746",
+      "responsible_professional": "DRA MARIA CAROLINA TOSTES PINTAO",
+      "responsible_professional_crm": "91813SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 21B53C122F74E840FDB31110A2AA1B35CAA87450A1CE224960C6287C9537C144"
+    },
+    {
+      "exam_type": "TEMPO DE TROMBOPLASTINA PARCIAL ATIVADA",
+      "test_name": "TEMPO DE TROMBOPLASTINA PARCIAL ATIVADA, plasma",
+      "method": "Coagulométrico",
+      "results": [
+        {
+          "test": "NORMAL DO DIA",
+          "result": "31,1",
+          "unit": "segundos"
+        },
+        {
+          "test": "NORMAL DO DIA",
+          "result": "28,8",
+          "unit": "segundos"
+        },
+        {
+          "test": "RELACAO PACIENTE/NORMAL",
+          "result": "1,08",
+          "reference_range": {
+            "min": "0,91",
+            "max": "1,20"
+          }
+        }
+      ],
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 15:20",
+      "cnes": "3066746",
+      "responsible_professional": "DRA MARIA CAROLINA TOSTES PINTAO",
+      "responsible_professional_crm": "91813SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 4D8A1BBAFE8C5492BB87D299AFDC356A8B79CBDB034EA6B3203BB2466FF09F6C"
+    },
+    {
+      "exam_type": "HEMOGRAMA",
+      "test_name": "HEMOGRAMA, sangue total",
+      "series": [
+        {
+          "series_name": "ERITRÓCITOS",
+          "results": [
+            {
+              "test": "ERITRÓCITOS",
+              "result": "4,89",
+              "unit": "milhões/mm3",
+              "reference_range": {
+                "min": "4,32",
+                "max": "5,67",
+                "unit": "milhões/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "HEMOGLOBINA",
+              "result": "14,3",
+              "unit": "g/dL",
+              "reference_range": {
+                "min": "13,3",
+                "max": "16,5",
+                "unit": "g/dL",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "HEMATÓCRITO",
+              "result": "44,2",
+              "unit": "%",
+              "reference_range": {
+                "min": "39,2",
+                "max": "49,0",
+                "unit": "%",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "HEMOGLOBINA CORPUSCULAR MÉDIA",
+              "result": "29,2",
+              "unit": "pg",
+              "reference_range": {
+                "min": "27,7",
+                "max": "32,7",
+                "unit": "pg",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "VOLUME CORPUSCULAR MÉDIO",
+              "result": "90,4",
+              "unit": "fL",
+              "reference_range": {
+                "min": "81,7",
+                "max": "95,3",
+                "unit": "fL",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "CONCENTRAÇÃO DE HEMOGLOBINA CORPUSCULAR MÉDIA",
+              "result": "32,4",
+              "unit": "g/dL",
+              "reference_range": {
+                "min": "32,4",
+                "max": "36,0",
+                "unit": "g/dL",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "COEFICIENTE DE VARIAÇÃO DO VOLUME ERITROCITÁRIO (RDW)",
+              "result": "13,1",
+              "unit": "%",
+              "reference_range": {
+                "min": "11,8",
+                "max": "14,1",
+                "unit": "%",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            }
+          ],
+          "morphological_characters": "normais"
+        },
+        {
+          "series_name": "SÉRIE BRANCA",
+          "results": [
+            {
+              "test": "LEUCÓCITOS",
+              "result": "5.700",
+              "unit": "/mm3",
+              "reference_range": {
+                "min": "3.650",
+                "max": "8.120",
+                "unit": "/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "Neutrófilos",
+              "result": "61,4",
+              "unit": "%",
+              "absolute_value": "3.500",
+              "absolute_unit": "/mm3",
+              "reference_range": {
+                "min": "1.590",
+                "max": "4.770",
+                "unit": "/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "Eosinófilos",
+              "result": "2,1",
+              "unit": "%",
+              "absolute_value": "120",
+              "absolute_unit": "/mm3",
+              "reference_range": {
+                "min": "34",
+                "max": "420",
+                "unit": "/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "Basófilos",
+              "result": "0,7",
+              "unit": "%",
+              "absolute_value": "40",
+              "absolute_unit": "/mm3",
+              "reference_range": {
+                "min": "10",
+                "max": "80",
+                "unit": "/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "Linfócitos",
+              "result": "27,7",
+              "unit": "%",
+              "absolute_value": "1.580",
+              "absolute_unit": "/mm3",
+              "reference_range": {
+                "min": "1.120",
+                "max": "2.950",
+                "unit": "/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "Monócitos",
+              "result": "8,1",
+              "unit": "%",
+              "absolute_value": "460",
+              "absolute_unit": "/mm3",
+              "reference_range": {
+                "min": "260",
+                "max": "730",
+                "unit": "/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            }
+          ],
+          "morphological_characters": "não foram observados caracteres tóxico-degenerativos nos neutrófilos; não foram observadas atipias linfocitárias"
+        },
+        {
+          "series_name": "PLAQUETAS",
+          "results": [
+            {
+              "test": "TOTAL DE PLAQUETAS",
+              "result": "229.000",
+              "unit": "/mm3",
+              "reference_range": {
+                "min": "151.000",
+                "max": "304.000",
+                "unit": "/mm3",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            },
+            {
+              "test": "VOLUME PLAQUETÁRIO MÉDIO",
+              "result": "10,8",
+              "unit": "fL",
+              "reference_range": {
+                "min": "9,2",
+                "max": "12,6",
+                "unit": "fL",
+                "notes": "Masc: Maior ou igual a 18 anos"
+              }
+            }
+          ],
+          "notes": [
+            "Os valores de referência para adultos são baseados em um estudo com 95 mil amostras de brasileiros saudáveis.",
+            "Exame automatizado por citometria de fluxo fluorescente e impedância, com confirmação das contagens e análise morfológica realizadas por microscopia, quando aplicável."
+          ]
+        }
+      ],
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 13:23",
+      "cnes": "3066746",
+      "responsible_professional": "DRA MARIA DE LOURDES L FERRARI CHAUFFAILLE",
+      "responsible_professional_crm": "44281SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 065660B8F60D7A9DBD256165F913227B0249A2392E99CC00E031FA26D8C01F8E"
+    },
+    {
+      "exam_type": "ELETROCARDIOGRAMA",
+      "test_name": "ELETROCARDIOGRAMA EM REPOUSO",
+      "indication": "avaliação pré-operatória",
+      "medication": "Zoloft",
+      "parameters": {
+        "cardiac_rhythm": "regular",
+        "heart_rate_bpm": 52,
+        "p_wave_duration_ms": 100,
+        "pr_interval_ms": 180,
+        "qrs_duration_ms": 110,
+        "sap_degrees": "+30 graus para frente",
+        "saqrs_degrees": "+40 graus para trás",
+        "sat_degrees": "+25 graus para frente"
+      },
+      "morphological_description_comment": "n.d.n.",
+      "conclusion": "Traçado dentro dos limites normais para a idade, sexo e biotipo.",
+      "notes": "Laudo de acordo com a III diretrizes da Sociedade Brasileira de Cardiologia sobre análise e emissão de laudos Eletrocardiográficos. Arq Bras Cardiol (2016) 106, 1-23.",
+      "reported_by": "Dr. ANTONIO SERGIO TEBEXRENI",
+      "reported_by_crm": "41000",
+      "signed_by": "Dr. ANTONIO SERGIO TEBEXRENI",
+      "signed_by_crm": "41000",
+      "released_date": "2023-06-21 09:27",
+      "observations": "Assinatura digital avançada: BA9C6CBE16FC5168F40233B6ADB5D6594A8D8EC9A452C7B455F44F80E79A079D"
+    },
+    {
+      "exam_type": "GLICOSE",
+      "test_name": "GLICOSE, soro",
+      "method": "Enzimático",
+      "result": "76",
+      "unit": "mg/dL",
+      "reference_range": {
+        "min": "70",
+        "max": "99",
+        "unit": "mg/dL"
+      },
+      "received_collected_date": "2023-06-21",
+      "released_date": "2023-06-21 19:52",
+      "cnes": "3066746",
+      "responsible_professional": "DR PEDRO SADDI ROSA",
+      "responsible_professional_crm": "107742SP",
+      "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: FB246AB0A6D266F6900B3F29CA907C806F17B8836275E95FF25D3920A0D40B2E"
+    }
+  ],
+  "evolutionary_report": {
+    "hematology_analytes": [
+      {
+        "analyte": "Eritrócitos",
+        "results": {
+          "4602240020_2023-06-21": "4,89",
+          "4602208605_2023-02-02": "4,76",
+          "4602135202_2022-02-28": "4,74(*)",
+          "4602050461_2021-01-12": "5,01(*)",
+          "4601988095_2020-01-21": "4,95(*)"
+        },
+        "reference_range": "4,32 a 5,67 milhões/mm3"
+      },
+      {
+        "analyte": "Hemoglobina",
+        "results": {
+          "4602240020_2023-06-21": "14,3",
+          "4602208605_2023-02-02": "14,1",
+          "4602135202_2022-02-28": "14,3(*)",
+          "4602050461_2021-01-12": "15,3(*)",
+          "4601988095_2020-01-21": "15,0(*)"
+        },
+        "reference_range": "13,3 a 16,5 g/dL"
+      },
+      {
+        "analyte": "Hematócrito",
+        "results": {
+          "4602240020_2023-06-21": "44,2",
+          "4602208605_2023-02-02": "43,0",
+          "4602135202_2022-02-28": "43,3(*)",
+          "4602050461_2021-01-12": "46,2(*)",
+          "4601988095_2020-01-21": "45,3(*)"
+        },
+        "reference_range": "39,2 a 49,0%"
+      },
+      {
+        "analyte": "Hemoglobina Corpuscular Média",
+        "results": {
+          "4602240020_2023-06-21": "29,2",
+          "4602208605_2023-02-02": "29,6",
+          "4602135202_2022-02-28": "30,2(*)",
+          "4602050461_2021-01-12": "30,5(*)",
+          "4601988095_2020-01-21": "30,3(*)"
+        },
+        "reference_range": "27,7 a 32,7 pg"
+      },
+      {
+        "analyte": "VCM",
+        "results": {
+          "4602240020_2023-06-21": "90,4",
+          "4602208605_2023-02-02": "90,3",
+          "4602135202_2022-02-28": "91,4(*)",
+          "4602050461_2021-01-12": "92,2(*)",
+          "4601988095_2020-01-21": "91,5(*)"
+        },
+        "reference_range": "81,7 a 95,3 fL"
+      },
+      {
+        "analyte": "Concentração de Hemoglobina Corpuscular",
+        "results": {
+          "4602240020_2023-06-21": "32,4",
+          "4602208605_2023-02-02": "32,8",
+          "4602135202_2022-02-28": "33,0(*)",
+          "4602050461_2021-01-12": "33,1(*)",
+          "4601988095_2020-01-21": "33,1(*)"
+        },
+        "reference_range": "32,4 a 36,0 g/dL"
+      },
+      {
+        "analyte": "RDW",
+        "results": {
+          "4602240020_2023-06-21": "13,1",
+          "4602208605_2023-02-02": "13,0",
+          "4602135202_2022-02-28": "13,2(*)",
+          "4602050461_2021-01-12": "13,3(*)",
+          "4601988095_2020-01-21": "13,2(*)"
+        },
+        "reference_range": "11,8 a 14,1%"
+      },
+      {
+        "analyte": "Leucócitos",
+        "results": {
+          "4602240020_2023-06-21": "5.700",
+          "4602208605_2023-02-02": "5.460",
+          "4602135202_2022-02-28": "5.310(*)",
+          "4602050461_2021-01-12": "7.240(*)",
+          "4601988095_2020-01-21": "5.290(*)"
+        },
+        "reference_range": "3.650 a 8.120/mm3"
+      },
+      {
+        "analyte": "Neutrófilos",
+        "results": {
+          "4602240020_2023-06-21": "3.500",
+          "4602208605_2023-02-02": "2.570",
+          "4602135202_2022-02-28": "3.160(*)",
+          "4602050461_2021-01-12": "4.990(*)(1)",
+          "4601988095_2020-01-21": "3.050(*)"
+        },
+        "reference_range": "1.590 a 4.770/mm3"
+      },
+      {
+        "analyte": "Eosinófilos",
+        "results": {
+          "4602240020_2023-06-21": "120",
+          "4602208605_2023-02-02": "130",
+          "4602135202_2022-02-28": "100(*)",
+          "4602050461_2021-01-12": "80(*)",
+          "4601988095_2020-01-21": "80(*)"
+        },
+        "reference_range": "34 a 420/mm3"
+      },
+      {
+        "analyte": "Basófilos",
+        "results": {
+          "4602240020_2023-06-21": "40",
+          "4602208605_2023-02-02": "30",
+          "4602135202_2022-02-28": "30(*)",
+          "4602050461_2021-01-12": "40(*)",
+          "4601988095_2020-01-21": "30(*)"
+        },
+        "reference_range": "10 a 80/mm3"
+      },
+      {
+        "analyte": "Linfócitos",
+        "results": {
+          "4602240020_2023-06-21": "1.580",
+          "4602208605_2023-02-02": "2.260",
+          "4602135202_2022-02-28": "1.540(*)",
+          "4602050461_2021-01-12": "1.480(*)",
+          "4601988095_2020-01-21": "1.620(*)"
+        },
+        "reference_range": "1.120 a 2.950/mm3"
+      },
+      {
+        "analyte": "Monócitos",
+        "results": {
+          "4602240020_2023-06-21": "460",
+          "4602208605_2023-02-02": "470",
+          "4602135202_2022-02-28": "480(*)",
+          "4602050461_2021-01-12": "650(*)",
+          "4601988095_2020-01-21": "510(*)"
+        },
+        "reference_range": "260 a 730/mm3"
+      },
+      {
+        "analyte": "Plaquetas",
+        "results": {
+          "4602240020_2023-06-21": "229.000",
+          "4602208605_2023-02-02": "274.000",
+          "4602135202_2022-02-28": "215.000(*)",
+          "4602050461_2021-01-12": "240.000(*)",
+          "4601988095_2020-01-21": "258.000(*)"
+        },
+        "reference_range": "151.000 a 304.000/mm3"
+      },
+      {
+        "analyte": "Volume plaquetário médio",
+        "results": {
+          "4602240020_2023-06-21": "10,8",
+          "4602208605_2023-02-02": "10,2",
+          "4602135202_2022-02-28": "11,1",
+          "4602050461_2021-01-12": "10,5",
+          "4601988095_2020-01-21": "11,0"
+        },
+        "reference_range": "9,2 a 12,6 fL"
+      },
+      {
+        "analyte": "Tempo de Protrombina",
+        "results": {
+          "4602240020_2023-06-21": "11,3",
+          "4602135202_2022-02-28": "11,1",
+          "4602050461_2021-01-12": "12,3",
+          "4601988095_2020-01-21": "11,8"
+        },
+        "reference_range": "10,1 a 12,8 segundos"
+      },
+      {
+        "analyte": "TP/INR",
+        "results": {
+          "4602240020_2023-06-21": "1,0",
+          "4602135202_2022-02-28": "1,0",
+          "4602050461_2021-01-12": "1,1",
+          "4601988095_2020-01-21": "1,0"
+        },
+        "reference_range": "0,9 a 1,1"
+      },
+      {
+        "analyte": "TTPA",
+        "results": {
+          "4602240020_2023-06-21": "31,1",
+          "4602135202_2022-02-28": "27,0(*)",
+          "4602050461_2021-01-12": "29,8(*)",
+          "4601988095_2020-01-21": "32,2(*)"
+        }
+      },
+      {
+        "analyte": "TTPA-Normal do dia",
+        "results": {
+          "4602240020_2023-06-21": "28,8",
+          "4602135202_2022-02-28": "28,5",
+          "4602050461_2021-01-12": "27,8",
+          "4601988095_2020-01-21": "28,7"
+        }
+      },
+      {
+        "analyte": "TTPA-Paciente/Normal",
+        "results": {
+          "4602240020_2023-06-21": "1,08",
+          "4602135202_2022-02-28": "0,95",
+          "4602050461_2021-01-12": "1,07",
+          "4601988095_2020-01-21": "1,12"
+        },
+        "reference_range": "0,91 a 1,20"
+      }
+    ],
+    "clinical_chemistry_analytes": [
+      {
+        "analyte": "Glicose",
+        "results": {
+          "4602240020_2023-06-21": "76",
+          "4602208605_2023-02-02": "84",
+          "4602135202_2022-02-28": "87",
+          "4602050461_2021-01-12": "83",
+          "4601988095_2020-01-21": "90"
+        },
+        "reference_range": "70 a 99 mg/dL"
+      },
+      {
+        "analyte": "Ureia",
+        "results": {
+          "4602240020_2023-06-21": "38",
+          "4602208605_2023-02-02": "36",
+          "4602135202_2022-02-28": "32"
+        },
+        "reference_range": "10 a 50 mg/dL"
+      },
+      {
+        "analyte": "Creatinina",
+        "results": {
+          "4602240020_2023-06-21": "0,93",
+          "4602208605_2023-02-02": "1,10",
+          "4602135202_2022-02-28": "0,91",
+          "4602050461_2021-01-12": "1,03",
+          "4601988095_2020-01-21": "0,94"
+        },
+        "reference_range": "0,70 a 1,30 mg/dL"
+      }
+    ],
+    "electrolyte_analytes": [
+      {
+        "analyte": "Sódio",
+        "results": {
+          "4602240020_2023-06-21": "142",
+          "4602135202_2022-02-28": "139",
+          "4602050461_2021-01-12": "140"
+        },
+        "reference_range": "136 a 145 mEq/L"
+      },
+      {
+        "analyte": "Potássio",
+        "results": {
+          "4602240020_2023-06-21": "4,4",
+          "4602135202_2022-02-28": "4,3",
+          "4602050461_2021-01-12": "4,3"
+        },
+        "reference_range": "3,5 a 5,1 mEq/L"
+      }
+    ],
+    "notes": [
+      "Os intervalos de referência deste exame dependem da faixa etária do(a) paciente.",
+      "Resultado fora da faixa de referência."
+    ]
+  },
+  "general_note": "A interpretação do resultado deste(s) exame(s) e a conclusão diagnóstica são atos médicos e dependem da análise conjunta dos dados clínicos e demais exames do(a) paciente.",
+  "source_files": [
+    {
+      "filename": "Resultado-Laudo-4602240020.pdf",
+      "record_number": "",
+      "exam_date": ""
+    }
+  ]
+}

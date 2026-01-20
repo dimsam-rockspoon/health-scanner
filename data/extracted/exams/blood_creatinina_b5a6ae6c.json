@@ -1,0 +1,33 @@
+{
+  "_id": "b5a6ae6c-bfca-4fa8-9638-d719e53154d1",
+  "patient_id": "PAT-20A8D30ECDC9",
+  "exam_type": "blood",
+  "exam_code": "CREATININA",
+  "exam_name": "CREATININA, soro",
+  "collected_at": "2023-06-21T00:00:00Z",
+  "reported_at": "2023-06-21 19:52",
+  "status": "final",
+  "priority": "routine",
+  "location": "Fleury",
+  "details": {
+    "method": "Cinético colorimétrico",
+    "measurements": [
+      {
+        "name": "CREATININA, soro",
+        "value": "0,93",
+        "unit": "mg/dL",
+        "reference_range": {
+          "min": "0,70",
+          "max": "1,30",
+          "unit": "mg/dL",
+          "notes": "Masc: mais de 12 anos"
+        }
+      }
+    ],
+    "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 74C8A5BF43EC0D0032D4267D97E40E7A680513096232C412D2EE70BDAA12B15C"
+  },
+  "performing_physician": {
+    "name": "DR NAIRO MASSAKAZU SUMITA",
+    "crm": "61649SP"
+  }
+}

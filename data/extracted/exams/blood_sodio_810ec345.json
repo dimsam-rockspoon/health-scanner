@@ -1,0 +1,32 @@
+{
+  "_id": "810ec345-b927-407c-ae54-d170cc0d2b59",
+  "patient_id": "PAT-20A8D30ECDC9",
+  "exam_type": "blood",
+  "exam_code": "SODIO",
+  "exam_name": "SODIO, soro",
+  "collected_at": "2023-06-21T00:00:00Z",
+  "reported_at": "2023-06-21 20:36",
+  "status": "final",
+  "priority": "routine",
+  "location": "Fleury",
+  "details": {
+    "method": "Potenciométrico",
+    "measurements": [
+      {
+        "name": "SODIO, soro",
+        "value": "142",
+        "unit": "mEq/L",
+        "reference_range": {
+          "min": "136",
+          "max": "145",
+          "unit": "mEq/L"
+        }
+      }
+    ],
+    "observations": "Exame liberado de acordo com regras definidas e validadas pela assessoria médica. Assinatura digital avançada: 8B1FC0863335B20EF86F703A6149DA55E7AAEAFD7AF885CF0B7B51456890D801"
+  },
+  "performing_physician": {
+    "name": "DR NAIRO MASSAKAZU SUMITA",
+    "crm": "61649SP"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "patient_info": {
+    "name": "RAPHAEL SCAFF RODRIGUES",
+    "date_of_birth": "1996-02-19",
+    "client_id": "3801455905"
+  },
+  "physician_info": {
+    "referring_physician": "DRA. RUTH BUENO DE OLIVEIRA",
+    "referring_physician_crm": "34707SP",
+    "lauding_physician": "Dra. ROSANA SOUZA CARDOSO ALVES",
+    "lauding_physician_crm": "61887",
+    "responsible_technical_physician": "DR EDGAR GIL RIZZATTI",
+    "responsible_technical_physician_crm": "94199SP"
+  },
+  "facility_info": {
+    "name": "Fleury Medicina e Saúde",
+    "address": "Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200",
+    "phone_grande_sao_paulo": "3179-0822 ou 30-FLEURY",
+    "phone_other_locations": "0800-704-0822",
+    "website": "www.fleury.com.br"
+  },
+  "exam_metadata": {
+    "exam_type": "POLISSONOGRAFIA",
+    "record_number": "3801455905",
+    "exam_date": "2023-05-10",
+    "released_date": "2023-05-11",
+    "released_time": "10:08",
+    "digital_signature": "DBEC395806A64DAF33C27D741567ED378386B9BE8A8FDEDA0884D6533CB91776",
+    "printed_date": "2025-12-30",
+    "printed_time": "11:07"
+  },
+  "exam_results": {
+    "polysomnography": {
+      "monitoring_details": {
+        "equipment": "Alice PDX",
+        "location": "Patient's residence",
+        "total_recording_time_minutes": 499.2,
+        "start_time": "21:53:47",
+        "end_time": "06:12:59",
+        "electrophysiological_parameters": "EEG: C3-M2, C4-M1, O1-M2, O2-M1; EOG (E e D); EMG submentoniano e tibial anterior; sensor de ronco; fluxo aéreo (cânula de pressão nasal e termistor); cintas torácica e abdominal de padrão piezo-elétrico; detector de posição; oxímetro de pulso e ECG."
+      },
+      "sleep_architecture": {
+        "total_recording_time_minutes": 499.2,
+        "total_sleep_time_minutes": 353.5,
+        "sleep_efficiency_percent": 73.6,
+        "sleep_efficiency_status": "reduced",
+        "sleep_stage_distribution": {
+          "stage_1_n1_percent": 7.9,
+          "stage_2_n2_percent": 62.7,
+          "stage_3_n3_percent": 17.4,
+          "rem_sleep_percent": 12.0
+        },
+        "sleep_latency_minutes": 35.5,
+        "rem_sleep_latency_minutes": 146.5,
+        "wakefulness_during_total_sleep_time_minutes": 85.0,
+        "sleep_fragmentation": {
+          "microarousals": 84,
+          "microarousals_per_hour": 14.3,
+          "complete_arousals": 14
+        },
+        "periodic_limb_movements": "Not registered"
+      },
+      "respiratory_events": {
+        "obstructive_apneas": 15,
+        "hypopneas": 27,
+        "associated_with": "Oxyhemoglobin desaturations",
+        "global_index_events_per_hour_of_sleep": 7.1,
+        "apnea_per_hour": 2.5,
+        "hypopnea_per_hour": 4.6,
+        "oxygen_saturation_sao2": {
+          "in_wakefulness_percent": 96,
+          "mean_percent": 95,
+          "minimum_percent": 83
+        },
+        "snoring": "Light snoring registered during sleep.",
+        "event_position": "Supine and lateral."
+      },
+      "cardiac_events": {
+        "mean_heart_rate_bpm": 58.5,
+        "arrhythmias": "Not observed"
+      },
+      "other_observations": {
+        "epworth_sleepiness_scale": 0
+      },
+      "conclusions": [
+        "Apnea-Hypopnea Index (AHI): Slightly increased (IAH= 7.1).",
+        "Snoring: Light and intermittent.",
+        "Sleep Latencies: Sleep and REM sleep latencies increased.",
+        "Sleep Stage Reduction: Reduction in the percentage of slow-wave sleep and REM sleep.",
+        "Sleep Fragmentation: Sleep fragmented by numerous arousals and reduced efficiency."
+      ]
+    }
+  },
+  "source_files": [
+    {
+      "filename": "Resultado-Laudo-3801455905.pdf",
+      "record_number": "",
+      "exam_date": ""
+    }
+  ]
+}

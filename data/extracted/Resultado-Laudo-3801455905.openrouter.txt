@@ -1,0 +1,66 @@
+Here's the extracted information from the medical exam document:
+
+**Patient Information:**
+*   **Cliente:** RAPHAEL SCAFF RODRIGUES
+*   **Data de Nascimento:** 19/02/1996
+
+**Physician and Facility Information:**
+*   **Médico:** DRA. RUTH BUENO DE OLIVEIRA CRM 34707SP
+*   **Atendimento:**
+    *   Grande São Paulo: 3179-0822 ou 30-FLEURY
+    *   Outras localidades: 0800-704-0822
+*   **Website:** www.fleury.com.br
+*   **Laudado por:** Dra. ROSANA SOUZA CARDOSO ALVES - CRM: 61887
+*   **Assinado por:** Dra. ROSANA SOUZA CARDOSO ALVES - CRM: 61887
+*   **CRM:** 900959 - RESPONSÁVEL TÉCNICO: DR EDGAR GIL RIZZATTI CRM: 94199SP
+*   **Endereço:** Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200
+
+**Document Information:**
+*   **Ficha:** 3801455905
+*   **Data da Ficha:** 10/05/2023
+*   **LIBERADO EM:** 11/05/2023 10:08
+*   **Assinatura digital avançada:** DBEC395806A64DAF33C27D741567ED378386B9BE8A8FDEDA0884D6533CB91776
+*   **Impresso em:** 30/12/2025 11:07 - Página: 1/1
+
+**POLISSONOGRAFIA - Descrição de Exame Polissonográfico:**
+*   **Monitoramento:** O paciente foi monitorado com o equipamento Alice PDX em sua residência por 499.2 minutos.
+*   **Início do monitoramento:** 21:53:47 horas
+*   **Conclusão do monitoramento:** 06:12:59 horas
+*   **Parâmetros eletrofisiológicos utilizados:** EEG: C3-M2, C4-M1, O1-M2, O2-M1, EOG (E e D), EMG submentoniano e tibial anterior, sensor de ronco, fluxo aéreo (cânula de pressão nasal e termistor), cintas torácica e abdominal de padrão piezo-elétrico, detector de posição, oxímetro de pulso e ECG.
+*   **Tempo total de registro:** 499.2 minutos
+*   **Tempo total de sono:** 353.5 minutos
+*   **Eficiência do sono:** reduzida (73.6%).
+*   **Distribuição do sono:**
+    *   Estágio 1 (N1): 7.9%
+    *   Estágio 2 (N2): 62.7%
+    *   Estágio 3 (N3): 17.4%
+    *   Sono REM: 12.0%
+*   **Latência para o sono:** 35.5 minutos
+*   **Latência para o sono REM:** 146.5 minutos
+*   **Tempo em vigília durante o sono:** 85.0 minutos
+*   **Fragmentação do sono:**
+    *   Microdespertares: 84 (14.3/hora)
+    *   Despertares completos: 14
+*   **Movimentos periódicos de membros inferiores:** Não foram registrados.
+*   **Eventos respiratórios durante o sono:**
+    *   Apnéias obstrutivas: 15
+    *   Hipopnéias: 27
+    *   Índice global (apnéia-hipopnéia): 7.1 eventos/hora de sono
+    *   Apnéia/hora: 2.5
+    *   Hipopnéia/hora: 4.6
+*   **Saturação de oxigênio (SaO2):**
+    *   Em vigília: 96%
+    *   Média: 95%
+    *   Mínima: 83%
+*   **Ronco:** Leve, registrado durante o sono.
+*   **Posição dos eventos:** Supina e lateral.
+*   **Frequência cardíaca média:** 58.5 batimentos por minuto.
+*   **Arritmias cardíacas:** Não foram observadas.
+*   **OBS:** Escala de sonolência de Epworth: 0
+
+**Conclusões:**
+1.  Índice de apnéia-hipopnéia levemente aumentado (IAH= 7.1).
+2.  Ronco leve e intermitente.
+3.  Latências de sono e de sono REM aumentadas.
+4.  Redução do percentual do sono de ondas lentas e do sono REM.
+5.  Sono fragmentado por numerosos despertares e eficiência reduzida.

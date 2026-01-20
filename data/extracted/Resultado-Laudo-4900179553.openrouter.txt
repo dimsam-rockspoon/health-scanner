@@ -1,0 +1,57 @@
+Here's the extracted text and data from the medical exam document, formatted as structured text:
+
+**Patient Information:**
+*   **Cliente:** RAPHAEL SCAFF RODRIGUES
+*   **Data de Nascimento:** 19/02/1996
+
+**Physician Information:**
+*   **Médico:** DR. DANILO SOARES DIVINO CRM 171930SP
+
+**Facility Information:**
+*   **Facility Name:** Fleury Medicina e Saúde
+*   **Atendimento (Grande São Paulo):** 3179-0822 ou 30-FLEURY
+*   **Atendimento (Outras localidades):** 0800-704-0822
+*   **Website:** www.fleury.com.br
+*   **CRM (Responsável Técnico):** 900959 - DR EDGAR GIL RIZZATTI CRM: 94199SP
+*   **Address:** Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200
+
+**Document Information:**
+*   **Ficha:** 4900179553
+*   **Data da Ficha:** 04/05/2023
+*   **Impresso em:** 30/12/2025 11:07 - Página: 1/1
+*   **Liberado em:** 08/05/2023 20:16
+*   **Assinatura digital avançada:** F1CB29B1C165319CB1CBC72BA8CD330FA1211C8756CC9BB3C7CBC0C4BB4E5698
+
+**Exam Details:**
+*   **Exam Type:** RESSONANCIA MAGNETICA, JOELHO, DIREITO
+*   **Title:** RESSONÂNCIA MAGNÉTICA DO JOELHO DIREITO
+
+**Method:**
+*   Ressonância magnética realizada com sequências FSE em T1 e T2. Planos de cortes múltiplos.
+
+**Análise (Analysis):**
+*   Rotura completa do ligamento cruzado anterior com descontinuidade e horizontalização de suas fibras.
+*   Impactação com pequena fratura subcondral do côndilo femoral lateral com tênue edema da medular óssea adjacente bem como na porção posterior do platô tibial lateral achados relacionados a translação anterior da tíbia em relação ao fêmur.
+*   Discreto estiramento do ligamento colateral medial sem descontinuidade de suas fibras.
+*   Ligamento colateral lateral preservado.
+*   Ligamento cruzado posterior sem alterações.
+*   Rotura vertical do corno posterior do menisco medial próximo à junção meniscocapsular com tênue edema perimeniscal adjacente.
+*   Menisco lateral sem evidências de roturas.
+*   Derrame articular.
+*   Tendão quadríceps e ligamento patelar íntegros.
+*   Erosão condral profunda na faceta medial da patela medindo cerca de 0,5 cm sem alterações do subcondral.
+*   Cartilagem troclear sem alterações.
+*   Leve edema peri-capsular na região poplítea.
+
+**Opinião (Opinion):**
+*   Rotura completa do ligamento cruzado anterior.
+*   Edemas contusionais conforme relatado acima devido a translação anterior da tíbia em relação ao fêmur.
+*   Estiramento do ligamento colateral medial.
+*   Rotura vertical do corno posterior do menisco medial adjacente a junção meniscocapsular.
+
+**Reporting Physicians:**
+*   **Laudado por:** CRM 89476/SP - DR. FLAVIO ALBERTOTTI
+*   **Revisado por:** CRM 89476/SP - DR. FLAVIO ALBERTOTTI
+
+**Disclaimer:**
+*   A interpretação do resultado deste(s) exame(s) e a conclusão diagnóstica são atos médicos e dependem da análise conjunta dos dados clínicos e demais exames do(a) paciente.

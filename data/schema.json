@@ -1,0 +1,814 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MedicalExamReport",
+  "description": "Schema for Brazilian medical laboratory exam reports",
+  "type": "object",
+  "properties": {
+    "source_files": {
+      "type": "array",
+      "description": "List of source PDF files used to extract data",
+      "items": {
+        "type": "object",
+        "properties": {
+          "filename": {
+            "type": "string",
+            "description": "Original PDF filename"
+          },
+          "record_number": {
+            "type": "string",
+            "description": "Exam record number from this file"
+          },
+          "exam_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of exams in this file"
+          }
+        },
+        "required": [
+          "filename"
+        ]
+      }
+    },
+    "patient_info": {
+      "type": "object",
+      "description": "Patient identification and demographics",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Patient full name"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of birth (YYYY-MM-DD)"
+        },
+        "age": {
+          "type": "integer",
+          "description": "Patient age in years"
+        },
+        "weight_kg": {
+          "type": "number",
+          "description": "Weight in kilograms"
+        },
+        "height_m": {
+          "type": "number",
+          "description": "Height in meters"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female",
+            "other"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "date_of_birth"
+      ]
+    },
+    "physician_info": {
+      "type": "object",
+      "description": "Requesting physician information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Physician name"
+        },
+        "crm": {
+          "type": "string",
+          "description": "CRM registration number (Brazilian medical license)"
+        },
+        "state": {
+          "type": "string",
+          "description": "State of CRM registration (e.g., SP, RJ)"
+        }
+      },
+      "required": [
+        "name",
+        "crm"
+      ]
+    },
+    "facility_info": {
+      "type": "object",
+      "description": "Laboratory/medical facility information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Facility name"
+        },
+        "address": {
+          "type": "string",
+          "description": "Full address"
+        },
+        "cnes": {
+          "type": "string",
+          "description": "CNES registration number"
+        },
+        "technical_responsible": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "crm": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "exam_info": {
+      "type": "object",
+      "description": "Exam record metadata",
+      "properties": {
+        "record_number": {
+          "type": "string",
+          "description": "Exam record/file number (Ficha)"
+        },
+        "exam_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of exam"
+        },
+        "indication": {
+          "type": "string",
+          "description": "Clinical indication for the exam"
+        },
+        "current_medications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of current medications"
+        }
+      },
+      "required": [
+        "record_number",
+        "exam_date"
+      ]
+    },
+    "biochemistry": {
+      "type": "object",
+      "description": "Biochemistry test results",
+      "properties": {
+        "creatinine": {
+          "$ref": "#/definitions/simple_test_result"
+        },
+        "urea": {
+          "$ref": "#/definitions/simple_test_result"
+        },
+        "glucose": {
+          "$ref": "#/definitions/simple_test_result"
+        },
+        "sodium": {
+          "$ref": "#/definitions/simple_test_result"
+        },
+        "potassium": {
+          "$ref": "#/definitions/simple_test_result"
+        }
+      }
+    },
+    "coagulation": {
+      "type": "object",
+      "description": "Coagulation panel results",
+      "properties": {
+        "prothrombin_time": {
+          "type": "object",
+          "properties": {
+            "result_seconds": {
+              "type": "number"
+            },
+            "reference_min": {
+              "type": "number"
+            },
+            "reference_max": {
+              "type": "number"
+            },
+            "inr": {
+              "type": "number",
+              "description": "International Normalized Ratio"
+            },
+            "inr_reference_min": {
+              "type": "number"
+            },
+            "inr_reference_max": {
+              "type": "number"
+            },
+            "normal_of_day": {
+              "type": "number"
+            },
+            "isi": {
+              "type": "number",
+              "description": "International Sensitivity Index"
+            },
+            "method": {
+              "type": "string"
+            },
+            "collected_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "released_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "responsible_physician": {
+              "type": "string"
+            }
+          }
+        },
+        "aptt": {
+          "type": "object",
+          "description": "Activated Partial Thromboplastin Time",
+          "properties": {
+            "result_seconds": {
+              "type": "number"
+            },
+            "normal_of_day": {
+              "type": "number"
+            },
+            "patient_normal_ratio": {
+              "type": "number"
+            },
+            "ratio_reference_min": {
+              "type": "number"
+            },
+            "ratio_reference_max": {
+              "type": "number"
+            },
+            "method": {
+              "type": "string"
+            },
+            "collected_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "released_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "responsible_physician": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "complete_blood_count": {
+      "type": "object",
+      "description": "Complete Blood Count (Hemograma)",
+      "properties": {
+        "red_blood_cells": {
+          "type": "object",
+          "description": "Red blood cell series (Serie Vermelha)",
+          "properties": {
+            "erythrocytes": {
+              "$ref": "#/definitions/simple_test_result"
+            },
+            "hemoglobin": {
+              "$ref": "#/definitions/simple_test_result"
+            },
+            "hematocrit": {
+              "$ref": "#/definitions/simple_test_result"
+            },
+            "mch": {
+              "type": "object",
+              "description": "Mean Corpuscular Hemoglobin",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/simple_test_result"
+                }
+              ]
+            },
+            "mcv": {
+              "type": "object",
+              "description": "Mean Corpuscular Volume",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/simple_test_result"
+                }
+              ]
+            },
+            "mchc": {
+              "type": "object",
+              "description": "Mean Corpuscular Hemoglobin Concentration",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/simple_test_result"
+                }
+              ]
+            },
+            "rdw": {
+              "type": "object",
+              "description": "Red Cell Distribution Width",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/simple_test_result"
+                }
+              ]
+            },
+            "morphological_characteristics": {
+              "type": "string"
+            }
+          }
+        },
+        "white_blood_cells": {
+          "type": "object",
+          "description": "White blood cell series (Serie Branca)",
+          "properties": {
+            "total_leukocytes": {
+              "$ref": "#/definitions/simple_test_result"
+            },
+            "differential": {
+              "type": "object",
+              "properties": {
+                "neutrophils": {
+                  "$ref": "#/definitions/differential_count"
+                },
+                "eosinophils": {
+                  "$ref": "#/definitions/differential_count"
+                },
+                "basophils": {
+                  "$ref": "#/definitions/differential_count"
+                },
+                "lymphocytes": {
+                  "$ref": "#/definitions/differential_count"
+                },
+                "monocytes": {
+                  "$ref": "#/definitions/differential_count"
+                }
+              }
+            },
+            "morphological_characteristics": {
+              "type": "string"
+            }
+          }
+        },
+        "platelets": {
+          "type": "object",
+          "description": "Platelet count and indices",
+          "properties": {
+            "count": {
+              "$ref": "#/definitions/simple_test_result"
+            },
+            "mpv": {
+              "type": "object",
+              "description": "Mean Platelet Volume",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/simple_test_result"
+                }
+              ]
+            }
+          }
+        },
+        "method": {
+          "type": "string"
+        },
+        "collected_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "released_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "responsible_physician": {
+          "type": "string"
+        }
+      }
+    },
+    "electrocardiogram": {
+      "type": "object",
+      "description": "Electrocardiogram (ECG) results",
+      "properties": {
+        "heart_rate_bpm": {
+          "type": "integer"
+        },
+        "rhythm": {
+          "type": "string"
+        },
+        "p_wave_duration_ms": {
+          "type": "integer"
+        },
+        "pr_interval_ms": {
+          "type": "integer"
+        },
+        "qrs_duration_ms": {
+          "type": "integer"
+        },
+        "p_axis_degrees": {
+          "type": "string"
+        },
+        "qrs_axis_degrees": {
+          "type": "string"
+        },
+        "t_axis_degrees": {
+          "type": "string"
+        },
+        "morphological_description": {
+          "type": "string"
+        },
+        "conclusion": {
+          "type": "string"
+        },
+        "reported_by": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "crm": {
+              "type": "string"
+            }
+          }
+        },
+        "released_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "imaging_studies": {
+      "type": "array",
+      "description": "Imaging studies (MRI, CT, X-ray, Ultrasound, etc.)",
+      "items": {
+        "$ref": "#/definitions/imaging_study"
+      }
+    },
+    "polysomnography": {
+      "type": "object",
+      "description": "Sleep study (Polysomnography) results",
+      "properties": {
+        "source_file": {
+          "type": "string",
+          "description": "Source PDF filename"
+        },
+        "equipment": {
+          "type": "string",
+          "description": "Equipment used (e.g., Alice PDX)"
+        },
+        "location": {
+          "type": "string",
+          "enum": ["home", "laboratory"],
+          "description": "Where the study was performed"
+        },
+        "recording": {
+          "type": "object",
+          "description": "Recording time metrics",
+          "properties": {
+            "start_time": { "type": "string", "description": "Recording start time" },
+            "end_time": { "type": "string", "description": "Recording end time" },
+            "total_recording_time_min": { "type": "number" },
+            "total_sleep_time_min": { "type": "number" },
+            "sleep_efficiency_percent": { "type": "number" },
+            "wakefulness_during_sleep_min": { "type": "number" }
+          }
+        },
+        "sleep_stages": {
+          "type": "object",
+          "description": "Sleep stage distribution",
+          "properties": {
+            "n1_percent": { "type": "number", "description": "Stage 1 (N1) percentage" },
+            "n2_percent": { "type": "number", "description": "Stage 2 (N2) percentage" },
+            "n3_percent": { "type": "number", "description": "Stage 3 (N3) / Slow wave sleep percentage" },
+            "rem_percent": { "type": "number", "description": "REM sleep percentage" }
+          }
+        },
+        "latencies": {
+          "type": "object",
+          "description": "Sleep latency measurements",
+          "properties": {
+            "sleep_latency_min": { "type": "number", "description": "Time to fall asleep" },
+            "rem_latency_min": { "type": "number", "description": "Time to first REM" }
+          }
+        },
+        "arousals": {
+          "type": "object",
+          "description": "Arousal events",
+          "properties": {
+            "microarousals_total": { "type": "integer" },
+            "microarousals_per_hour": { "type": "number" },
+            "complete_arousals": { "type": "integer" }
+          }
+        },
+        "respiratory_events": {
+          "type": "object",
+          "description": "Respiratory disturbance data",
+          "properties": {
+            "obstructive_apneas": { "type": "integer" },
+            "central_apneas": { "type": "integer" },
+            "mixed_apneas": { "type": "integer" },
+            "hypopneas": { "type": "integer" },
+            "ahi": { "type": "number", "description": "Apnea-Hypopnea Index (events/hour)" },
+            "apnea_index": { "type": "number", "description": "Apneas per hour" },
+            "hypopnea_index": { "type": "number", "description": "Hypopneas per hour" },
+            "ahi_supine": { "type": "number", "description": "AHI in supine position" },
+            "ahi_lateral": { "type": "number", "description": "AHI in lateral position" }
+          }
+        },
+        "oxygen_saturation": {
+          "type": "object",
+          "description": "SpO2 measurements",
+          "properties": {
+            "awake_spo2_percent": { "type": "number" },
+            "mean_spo2_percent": { "type": "number" },
+            "min_spo2_percent": { "type": "number" },
+            "time_below_90_percent_min": { "type": "number" }
+          }
+        },
+        "cardiac": {
+          "type": "object",
+          "description": "Cardiac measurements",
+          "properties": {
+            "mean_heart_rate_bpm": { "type": "number" },
+            "min_heart_rate_bpm": { "type": "number" },
+            "max_heart_rate_bpm": { "type": "number" },
+            "arrhythmias_detected": { "type": "boolean" },
+            "arrhythmia_description": { "type": "string" }
+          }
+        },
+        "limb_movements": {
+          "type": "object",
+          "description": "Periodic limb movement data",
+          "properties": {
+            "plm_total": { "type": "integer", "description": "Total periodic limb movements" },
+            "plm_index": { "type": "number", "description": "PLM per hour" },
+            "plm_with_arousal": { "type": "integer" }
+          }
+        },
+        "snoring": {
+          "type": "object",
+          "properties": {
+            "present": { "type": "boolean" },
+            "severity": { "type": "string", "enum": ["none", "mild", "moderate", "severe"] },
+            "pattern": { "type": "string", "description": "e.g., intermittent, continuous" }
+          }
+        },
+        "position_data": {
+          "type": "object",
+          "description": "Sleep position distribution",
+          "properties": {
+            "supine_percent": { "type": "number" },
+            "prone_percent": { "type": "number" },
+            "left_lateral_percent": { "type": "number" },
+            "right_lateral_percent": { "type": "number" }
+          }
+        },
+        "epworth_sleepiness_scale": {
+          "type": "integer",
+          "description": "Epworth Sleepiness Scale score (0-24)",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "conclusion": {
+          "type": "array",
+          "description": "Clinical conclusions",
+          "items": { "type": "string" }
+        },
+        "reported_by": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "crm": { "type": "string" }
+          }
+        },
+        "released_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "historical_results": {
+      "type": "array",
+      "description": "Historical comparison data from previous exams",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_number": {
+            "type": "string"
+          },
+          "exam_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "results": {
+            "type": "object",
+            "additionalProperties": {
+              "type": [
+                "number",
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "simple_test_result": {
+      "type": "object",
+      "properties": {
+        "source_file": {
+          "type": "string",
+          "description": "Source PDF filename this result was extracted from"
+        },
+        "value": {
+          "type": "number",
+          "description": "Measured value"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of measurement"
+        },
+        "reference_min": {
+          "type": "number",
+          "description": "Minimum reference value"
+        },
+        "reference_max": {
+          "type": "number",
+          "description": "Maximum reference value"
+        },
+        "reference_text": {
+          "type": "string",
+          "description": "Full reference range text if complex"
+        },
+        "method": {
+          "type": "string",
+          "description": "Laboratory method used"
+        },
+        "is_within_range": {
+          "type": "boolean",
+          "description": "Whether result is within reference range"
+        },
+        "collected_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "released_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "responsible_physician": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ]
+    },
+    "differential_count": {
+      "type": "object",
+      "description": "White blood cell differential count",
+      "properties": {
+        "percentage": {
+          "type": "number",
+          "description": "Percentage of total WBC"
+        },
+        "absolute_count": {
+          "type": "number",
+          "description": "Absolute count per mm3"
+        },
+        "reference_min": {
+          "type": "number",
+          "description": "Minimum reference (absolute)"
+        },
+        "reference_max": {
+          "type": "number",
+          "description": "Maximum reference (absolute)"
+        }
+      }
+    },
+    "imaging_study": {
+      "type": "object",
+      "description": "Imaging study report (MRI, CT, X-ray, Ultrasound)",
+      "properties": {
+        "source_file": {
+          "type": "string",
+          "description": "Source PDF filename this study was extracted from"
+        },
+        "exam_type": {
+          "type": "string",
+          "enum": [
+            "mri",
+            "ct",
+            "xray",
+            "ultrasound",
+            "other"
+          ],
+          "description": "Type of imaging modality"
+        },
+        "exam_name": {
+          "type": "string",
+          "description": "Full exam name as stated in report"
+        },
+        "body_part": {
+          "type": "string",
+          "description": "Body part examined (e.g., knee, shoulder, spine)"
+        },
+        "laterality": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right",
+            "bilateral",
+            "not_applicable"
+          ],
+          "description": "Side of body if applicable"
+        },
+        "method": {
+          "type": "string",
+          "description": "Technical method/sequences used"
+        },
+        "findings": {
+          "type": "array",
+          "description": "List of individual findings from the analysis",
+          "items": {
+            "type": "object",
+            "properties": {
+              "structure": {
+                "type": "string",
+                "description": "Anatomical structure (e.g., ACL, meniscus, cartilage)"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "abnormal",
+                  "not_evaluated"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "Detailed finding description"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "mild",
+                  "moderate",
+                  "severe",
+                  "complete"
+                ],
+                "description": "Severity if abnormal"
+              },
+              "measurement": {
+                "type": "string",
+                "description": "Any measurements mentioned (e.g., '0.5 cm')"
+              }
+            }
+          }
+        },
+        "analysis_text": {
+          "type": "string",
+          "description": "Full analysis/findings text as narrative"
+        },
+        "conclusion": {
+          "type": "array",
+          "description": "Summary conclusions/opinions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reported_by": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "crm": {
+              "type": "string"
+            }
+          }
+        },
+        "reviewed_by": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "crm": {
+              "type": "string"
+            }
+          }
+        },
+        "released_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "exam_type",
+        "body_part"
+      ]
+    }
+  },
+  "required": [
+    "patient_info",
+    "exam_info"
+  ]
+}

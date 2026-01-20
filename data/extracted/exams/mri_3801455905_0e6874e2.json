@@ -1,0 +1,29 @@
+{
+  "id": "0e6874e2-80f3-468b-99c6-db8265dd5f2f",
+  "patient_id": "PAT-20A8D30ECDC9",
+  "exam_type": "mri",
+  "exam_code": "3801455905",
+  "exam_name": "RESSONÂNCIA MAGNÉTICA DO JOELHO DIREITO",
+  "collected_at": "2023-05-10T00:00:00Z",
+  "reported_at": "2023-05-11 10:08",
+  "status": "FINAL",
+  "priority": "ROUTINE",
+  "location": {
+    "street": "Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200",
+    "country": "Brazil",
+    "name": "Fleury"
+  },
+  "mri_json": {
+    "contrast_used": false,
+    "sequences": [],
+    "image_series": [],
+    "findings": [],
+    "impression": [],
+    "recommendations": [],
+    "measurement_data": [],
+    "report_signed_by": "Dra. ROSANA SOUZA CARDOSO ALVES",
+    "report_signed_at": "2023-05-11 10:08"
+  },
+  "tags": [],
+  "sensitive": false
+}
