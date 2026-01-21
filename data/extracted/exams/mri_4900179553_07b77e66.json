@@ -1,0 +1,84 @@
+{
+  "id": "07b77e66-f162-4a25-bfeb-8de59bce19f8",
+  "patient_id": "PAT-20A8D30ECDC9",
+  "exam_type": "mri",
+  "exam_code": "4900179553",
+  "exam_name": "RESSONÂNCIA MAGNÉTICA DO JOELHO DIREITO",
+  "collected_at": "2023-05-04T00:00:00Z",
+  "reported_at": "2023-05-08 20:16",
+  "status": "FINAL",
+  "priority": "ROUTINE",
+  "location": {
+    "street": "Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200",
+    "country": "Brazil",
+    "name": "Fleury"
+  },
+  "result_summary": "Rotura completa do ligamento cruzado anterior.; Edemas contusionais conforme relatado acima devido a translação anterior da tíbia em relação ao fêmur.; Estiramento do ligamento colateral medial.; Rotura vertical do corno posterior do menisco medial adjacente a junção meniscocapsular.",
+  "mri_json": {
+    "body_region": "RESSONÂNCIA MAGNÉTICA DO JOELHO DIREITO",
+    "contrast_used": false,
+    "sequences": [],
+    "image_series": [],
+    "findings": [
+      {
+        "description": "Rotura completa do ligamento cruzado anterior com descontinuidade e horizontalização de suas fibras.",
+        "codes": []
+      },
+      {
+        "description": "Impactação com pequena fratura subcondral do côndilo femoral lateral com tênue edema da medular óssea adjacente bem como na porção posterior do platô tibial lateral achados relacionados a translação anterior da tíbia em relação ao fêmur.",
+        "codes": []
+      },
+      {
+        "description": "Discreto estiramento do ligamento colateral medial sem descontinuidade de suas fibras.",
+        "codes": []
+      },
+      {
+        "description": "Ligamento colateral lateral preservado.",
+        "codes": []
+      },
+      {
+        "description": "Ligamento cruzado posterior sem alterações.",
+        "codes": []
+      },
+      {
+        "description": "Rotura vertical do corno posterior do menisco medial próximo à junção meniscocapsular com tênue edema perimeniscal adjacente.",
+        "codes": []
+      },
+      {
+        "description": "Menisco lateral sem evidências de roturas.",
+        "codes": []
+      },
+      {
+        "description": "Derrame articular.",
+        "codes": []
+      },
+      {
+        "description": "Tendão quadríceps e ligamento patelar íntegros.",
+        "codes": []
+      },
+      {
+        "description": "Erosão condral profunda na faceta medial da patela medindo cerca de 0,5 cm sem alterações do subcondral.",
+        "codes": []
+      },
+      {
+        "description": "Cartilagem troclear sem alterações.",
+        "codes": []
+      },
+      {
+        "description": "Leve edema peri-capsular na região poplítea.",
+        "codes": []
+      }
+    ],
+    "impression": [
+      "Rotura completa do ligamento cruzado anterior.",
+      "Edemas contusionais conforme relatado acima devido a translação anterior da tíbia em relação ao fêmur.",
+      "Estiramento do ligamento colateral medial.",
+      "Rotura vertical do corno posterior do menisco medial adjacente a junção meniscocapsular."
+    ],
+    "recommendations": [],
+    "measurement_data": [],
+    "report_signed_at": "2023-05-08 20:16"
+  },
+  "tags": [],
+  "sensitive": false
+}

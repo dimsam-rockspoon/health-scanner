@@ -549,6 +549,119 @@ class MedicalExamExtractor:
             return f"{date_str}T00:00:00Z"
         return date_str
 
+    def _normalize_test_format(self, test: dict) -> dict:
+        """
+        Normalize test data from 'tests' format to 'exam_results' format.
+
+        The 'tests' format (from some extractions) uses:
+        - name: test name
+        - result: {value, unit} or results: [...]
+        - reference_ranges: {min, max, unit}
+        - timestamps: {received_collected, released}
+
+        The 'exam_results' format expects:
+        - exam_type: test type
+        - test_name: test name
+        - result: value (string)
+        - unit: unit
+        - reference_range: "min - max"
+        - collected_date: date
+        - released_date: date
+        """
+        # If already in exam_results format, return as-is
+        if "exam_type" in test:
+            return test
+
+        normalized = {
+            "exam_type": test.get("name", ""),
+            "test_name": test.get("name", ""),
+            "method": test.get("method"),
+        }
+
+        # Handle result - can be dict {value, unit} or direct value
+        result = test.get("result")
+        if isinstance(result, dict):
+            normalized["result"] = result.get("value")
+            normalized["unit"] = result.get("unit")
+        elif result is not None:
+            normalized["result"] = result
+
+        # Handle multiple results (e.g., hemogram series, coagulation tests)
+        if "results" in test:
+            results_list = test["results"]
+            if isinstance(results_list, list):
+                normalized["results"] = [
+                    {
+                        "name": r.get("parameter", r.get("name")),
+                        "value": r.get("value"),
+                        "unit": r.get("unit"),
+                        "reference_range": self._format_ref_range(r.get("reference_range")),
+                    }
+                    for r in results_list
+                ]
+
+        # Handle hemogram series format
+        if "series" in test:
+            all_results = []
+            for series in test["series"]:
+                series_name = series.get("name", "")
+                for r in series.get("results", []):
+                    all_results.append({
+                        "name": r.get("parameter"),
+                        "value": r.get("value"),
+                        "unit": r.get("unit"),
+                        "reference_range": self._format_ref_range(r.get("reference_range")),
+                        "group": series_name,
+                    })
+            if all_results:
+                normalized["results"] = all_results
+
+        # Handle reference ranges
+        ref_ranges = test.get("reference_ranges")
+        if ref_ranges and isinstance(ref_ranges, dict):
+            normalized["reference_range"] = self._format_ref_range(ref_ranges)
+
+        # Handle timestamps
+        timestamps = test.get("timestamps", {})
+        if timestamps:
+            normalized["collected_date"] = timestamps.get("received_collected")
+            released = timestamps.get("released", "")
+            # Extract just the date part if datetime
+            if released and " " in released:
+                normalized["released_date"] = released.split(" ")[0]
+            else:
+                normalized["released_date"] = released
+
+        # Handle EKG-specific fields
+        if "parameters" in test and isinstance(test["parameters"], dict):
+            # This is an EKG exam
+            normalized["parameters"] = [
+                {"name": k, "value": v}
+                for k, v in test["parameters"].items()
+            ]
+            normalized["conclusion"] = test.get("conclusion")
+            normalized["morphological_description_and_comment"] = test.get("morphological_description_comment")
+            normalized["indication"] = test.get("indication")
+            normalized["medication"] = test.get("medication")
+            if test.get("lauded_by"):
+                normalized["laudado_by"] = test["lauded_by"]
+
+        return normalized
+
+    def _format_ref_range(self, ref_range: dict | None) -> str | None:
+        """Format reference range dict to string."""
+        if not ref_range or not isinstance(ref_range, dict):
+            return None
+        min_val = ref_range.get("min")
+        max_val = ref_range.get("max")
+        if min_val is not None and max_val is not None:
+            return f"{min_val} - {max_val}"
+        elif min_val is not None:
+            return f"> {min_val}"
+        elif max_val is not None:
+            return f"< {max_val}"
+        return None
+
     def format_individual_exam_proto(
         self,
         merged_data: dict,
@@ -586,19 +699,51 @@ class MedicalExamExtractor:
         patient_id = transformer.generate_patient_id(patient_info)
         facility_info = merged_data.get("facility_info") or merged_data.get("facility_information", {})
 
-        # 1. Process exam_results[] - individual lab tests
-        exam_results = merged_data.get("exam_results", [])
+        # 1. Process exam_results[] and tests[] - individual lab tests
+        # Separate blood exams from other exams for grouping
+        # Check both "exam_results" and "tests" keys (different extraction formats)
+        exam_results = merged_data.get("exam_results", []) + merged_data.get("tests", [])
+        blood_exams_by_date: dict[str, list[dict]] = {}
+        other_exams: list[dict] = []
+
         for exam_result in exam_results:
             if not exam_result:
                 continue
 
-            exam_type_raw = exam_result.get("exam_type", "")
+            # Normalize different data formats
+            # "tests" format uses "name" instead of "exam_type"
+            exam_type_raw = exam_result.get("exam_type") or exam_result.get("name", "")
             normalized_type = transformer.normalize_exam_type(exam_type_raw)
 
+            # Normalize collection date (different formats)
+            collected_date = (
+                exam_result.get("collected_date")
+                or (exam_result.get("timestamps", {}).get("received_collected"))
+                or "unknown"
+            )
+
+            # Normalize the exam_result structure for transformer compatibility
+            normalized_result = self._normalize_test_format(exam_result)
+
+            if normalized_type == "blood":
+                # Group blood exams by collection date
+                if collected_date not in blood_exams_by_date:
+                    blood_exams_by_date[collected_date] = []
+                blood_exams_by_date[collected_date].append(normalized_result)
+            else:
+                other_exams.append((normalized_result, normalized_type))
+
+        # Process grouped blood exams - one LabTestResult per collection date
+        for collected_date, blood_exam_group in blood_exams_by_date.items():
+            exam = transformer.transform_blood_exams_grouped(
+                blood_exam_group, patient_id, facility_info
+            )
+            exams.append(exam)
+
+        # Process other (non-blood) exams individually
+        for exam_result, normalized_type in other_exams:
             if normalized_type == "ekg":
                 exam = transformer.transform_ekg_exam(exam_result, patient_id, facility_info)
-            elif normalized_type == "blood":
-                exam = transformer.transform_blood_exam(exam_result, patient_id, facility_info)
             else:
                 exam = transformer.transform_generic_exam(exam_result, patient_id, facility_info)
 
@@ -616,13 +761,21 @@ class MedicalExamExtractor:
             )
             exams.append(exam)
 
-        # 3. Process imaging exams (MRI, CT, X-ray, etc.) from exam_metadata + findings
-        exam_meta = merged_data.get("exam_metadata", {})
-        findings = merged_data.get("findings", [])
-        conclusion = merged_data.get("conclusion", [])
-        exam_type_raw = exam_meta.get("exam_type", "")
+        # 3. Process imaging exams (MRI, CT, X-ray, etc.) from exam_metadata/exam_details
+        # Check BOTH keys since they may contain different exams
+        imaging_sources = [
+            (merged_data.get("exam_metadata", {}), merged_data.get("findings", []), merged_data.get("conclusion", [])),
+            (merged_data.get("exam_details", {}), merged_data.get("analysis", []), merged_data.get("opinion", [])),
+        ]
 
-        if exam_type_raw:
+        for exam_meta, findings, conclusion in imaging_sources:
+            if not exam_meta:
+                continue
+
+            exam_type_raw = exam_meta.get("exam_type", "")
+            if not exam_type_raw:
+                continue
+
             normalized_type = transformer.normalize_exam_type(exam_type_raw)
 
             if normalized_type == "mri":

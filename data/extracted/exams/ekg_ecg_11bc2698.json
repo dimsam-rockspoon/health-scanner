@@ -1,0 +1,36 @@
+{
+  "id": "11bc2698-f021-4370-8200-a460e6aadef5",
+  "patient_id": "PAT-20A8D30ECDC9",
+  "exam_type": "ekg",
+  "exam_code": "ECG",
+  "exam_name": "ELETROCARDIOGRAMA EM REPOUSO",
+  "indication": "avaliação pré-operatória",
+  "clinical_notes": "Zoloft",
+  "reported_at": "2023-06-21",
+  "status": "FINAL",
+  "priority": "ROUTINE",
+  "location": {
+    "street": "Avenida Santo Amaro, 4.584 - São Paulo-SP - 04701-200",
+    "country": "Brazil",
+    "name": "Fleury"
+  },
+  "result_summary": "Traçado dentro dos limites normais para a idade, sexo e biotipo.",
+  "generic_json": {
+    "fields": {
+      "cardiac_rhythm": "regular",
+      "heart_rate": "52 bpm",
+      "p_wave_duration": "100 ms",
+      "pr_interval": "180 ms",
+      "qrs_duration": "110 ms",
+      "sap": "+30 graus para frente",
+      "saqrs": "+40 graus para trás",
+      "sat": "+25 graus para frente"
+    },
+    "notes": [
+      "Morphological description: n.d.n.",
+      "Conclusion: Traçado dentro dos limites normais para a idade, sexo e biotipo."
+    ]
+  },
+  "tags": [],
+  "sensitive": false
+}

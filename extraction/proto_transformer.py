@@ -259,18 +259,10 @@ Results available: {bool(exam_data.get('result') or exam_data.get('results'))}
 
         return None
 
-    def transform_blood_exam(
-        self,
-        exam_result: dict,
-        patient_id: str,
-        facility_info: dict,
-    ) -> LabTestResult:
-        """Transform a blood/lab exam to LabTestResult proto format."""
-        exam_type_raw = exam_result.get("exam_type", "")
-        exam_id = str(uuid.uuid4())
-
-        # Build analytes list
+    def _extract_analytes_from_exam(self, exam_result: dict) -> list[Analyte]:
+        """Extract analytes from a single exam result dict."""
         analytes = []
+        exam_type_raw = exam_result.get("exam_type", "")
 
         # Handle single result
         if "result" in exam_result:
@@ -333,6 +325,21 @@ Results available: {bool(exam_data.get('result') or exam_data.get('results'))}
                                     flag=flag,
                                 ))
 
+        return analytes
+
+    def transform_blood_exam(
+        self,
+        exam_result: dict,
+        patient_id: str,
+        facility_info: dict,
+    ) -> LabTestResult:
+        """Transform a blood/lab exam to LabTestResult proto format."""
+        exam_type_raw = exam_result.get("exam_type", "")
+        exam_id = str(uuid.uuid4())
+
+        # Build analytes list
+        analytes = self._extract_analytes_from_exam(exam_result)
+
         # Determine overall severity
         severity_flag = "Normal"
         for a in analytes:
@@ -363,6 +370,87 @@ Results available: {bool(exam_data.get('result') or exam_data.get('results'))}
             json=blood_exam,
         )
 
+    def transform_blood_exams_grouped(
+        self,
+        exam_results: list[dict],
+        patient_id: str,
+        facility_info: dict,
+    ) -> LabTestResult:
+        """
+        Transform multiple blood exam results into a single LabTestResult.
+
+        Groups all analytes from multiple blood tests (e.g., Creatinine, Potassium,
+        Sodium, CBC) collected on the same date into one consolidated blood exam.
+
+        Args:
+            exam_results: List of blood exam result dicts to combine
+            patient_id: Patient identifier
+            facility_info: Facility information dict
+
+        Returns:
+            Single LabTestResult containing all analytes from the grouped exams
+        """
+        if not exam_results:
+            raise ValueError("exam_results cannot be empty")
+
+        exam_id = str(uuid.uuid4())
+
+        # Collect all analytes from all exam results
+        all_analytes = []
+        panel_codes = []
+        test_names = []
+
+        for exam_result in exam_results:
+            analytes = self._extract_analytes_from_exam(exam_result)
+            all_analytes.extend(analytes)
+
+            exam_type_raw = exam_result.get("exam_type", "")
+            if exam_type_raw:
+                panel_codes.append(exam_type_raw)
+
+            test_name = exam_result.get("test_name", "")
+            if test_name:
+                test_names.append(test_name)
+
+        # Use the first exam's dates (they should all be the same for grouped exams)
+        first_exam = exam_results[0]
+        collected_date = first_exam.get("collected_date")
+        released_date = first_exam.get("released_date")
+
+        # Determine overall severity from all analytes
+        severity_flag = "Normal"
+        for a in all_analytes:
+            if a.flag and "critical" in a.flag:
+                severity_flag = "Critical"
+                break
+            elif a.flag in ("low", "high"):
+                severity_flag = "Abnormal"
+
+        # Create combined panel code and name
+        combined_panel_code = "blood_panel" if len(panel_codes) > 1 else (panel_codes[0] if panel_codes else "blood")
+        combined_exam_name = "Blood Panel" if len(test_names) > 1 else (test_names[0] if test_names else "Blood Exam")
+
+        blood_exam = BloodExam(
+            sample_type=first_exam.get("sample_type", "venous_blood"),
+            lab_panel_code=combined_panel_code,
+            analytes=all_analytes,
+        )
+
+        return LabTestResult(
+            id=exam_id,
+            patient_id=patient_id,
+            exam_type="blood",
+            exam_code=combined_panel_code,
+            exam_name=combined_exam_name,
+            collected_at=self.format_date(collected_date),
+            reported_at=released_date,
+            status=LabTestStatus.FINAL,
+            priority=LabPriority.ROUTINE,
+            location=self._create_address(facility_info),
+            severity_flag=severity_flag,
+            json=blood_exam,
+        )
+
     def transform_mri_exam(
         self,
         exam_metadata: dict,
@@ -385,22 +473,28 @@ Results available: {bool(exam_data.get('result') or exam_data.get('results'))}
             elif isinstance(f, str):
                 mri_findings.append(MRIFinding(description=f))
 
+        # Handle alternative field names from different extraction formats
+        record_number = exam_metadata.get("record_number") or exam_metadata.get("ficha_number")
+        release_date = exam_metadata.get("release_date") or exam_metadata.get("liberated_on", "").split(" ")[0] if exam_metadata.get("liberated_on") else ""
+        release_time = exam_metadata.get("release_time") or (exam_metadata.get("liberated_on", "").split(" ")[1] if " " in exam_metadata.get("liberated_on", "") else "")
+        reported_at = f"{release_date} {release_time}".strip() or None
+
         mri_exam = MRIExam(
-            body_region=exam_metadata.get("specific_exam", exam_metadata.get("body_part")),
+            body_region=exam_metadata.get("specific_exam") or exam_metadata.get("body_part") or exam_metadata.get("exam_title"),
             findings=mri_findings,
             impression=conclusion if isinstance(conclusion, list) else [conclusion] if conclusion else [],
             report_signed_by=exam_metadata.get("signed_by", {}).get("name") if isinstance(exam_metadata.get("signed_by"), dict) else exam_metadata.get("signed_by"),
-            report_signed_at=f"{exam_metadata.get('release_date', '')} {exam_metadata.get('release_time', '')}".strip() or None,
+            report_signed_at=reported_at,
         )
 
         return LabTestResult(
             id=exam_id,
             patient_id=patient_id,
             exam_type="mri",
-            exam_code=exam_metadata.get("record_number"),
+            exam_code=record_number,
             exam_name=exam_metadata.get("exam_title") or exam_metadata.get("specific_exam"),
             collected_at=self.format_date(exam_metadata.get("exam_date")),
-            reported_at=f"{exam_metadata.get('release_date', '')} {exam_metadata.get('release_time', '')}".strip() or None,
+            reported_at=reported_at,
             status=LabTestStatus.FINAL,
             priority=LabPriority.ROUTINE,
             location=self._create_address(facility_info),

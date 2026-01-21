@@ -103,7 +103,8 @@ def main():
         description="Extract medical exam data from PDF files using vision-capable LLMs"
     )
     parser.add_argument(
-        "pdf_path",
+        "--pdf_path",
+        default="./data",
         type=str,
         help="Path to PDF file or directory containing PDFs"
     )
