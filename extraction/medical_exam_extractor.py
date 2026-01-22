@@ -572,9 +572,12 @@ class MedicalExamExtractor:
         if "exam_type" in test:
             return test
 
+        # Get name from various possible keys
+        test_name = test.get("name") or test.get("test_name", "")
+
         normalized = {
-            "exam_type": test.get("name", ""),
-            "test_name": test.get("name", ""),
+            "exam_type": test_name,
+            "test_name": test_name,
             "method": test.get("method"),
         }
 
@@ -600,7 +603,7 @@ class MedicalExamExtractor:
                     for r in results_list
                 ]
 
-        # Handle hemogram series format
+        # Handle hemogram series format (tests format)
         if "series" in test:
             all_results = []
             for series in test["series"]:
@@ -616,33 +619,90 @@ class MedicalExamExtractor:
             if all_results:
                 normalized["results"] = all_results
 
+        # Handle sections format (exams format) - similar to series but uses "title" and "test"
+        if "sections" in test:
+            all_results = []
+            for section in test["sections"]:
+                section_name = section.get("title", "")
+                for r in section.get("results", []):
+                    all_results.append({
+                        "name": r.get("test", r.get("parameter")),
+                        "value": r.get("value"),
+                        "unit": r.get("unit"),
+                        "reference_range": r.get("reference_range"),
+                        "group": section_name,
+                    })
+            if all_results:
+                normalized["results"] = all_results
+
+        # Handle results with "test" key instead of "parameter" or "name"
+        if "results" in test and not normalized.get("results"):
+            results_list = test["results"]
+            if isinstance(results_list, list):
+                normalized["results"] = [
+                    {
+                        "name": r.get("test", r.get("parameter", r.get("name"))),
+                        "value": r.get("value"),
+                        "unit": r.get("unit"),
+                        "reference_range": r.get("reference_range") if isinstance(r.get("reference_range"), str) else self._format_ref_range(r.get("reference_range")),
+                    }
+                    for r in results_list
+                ]
+
         # Handle reference ranges
         ref_ranges = test.get("reference_ranges")
         if ref_ranges and isinstance(ref_ranges, dict):
             normalized["reference_range"] = self._format_ref_range(ref_ranges)
 
-        # Handle timestamps
+        # Handle timestamps - check both nested and direct formats
         timestamps = test.get("timestamps", {})
         if timestamps:
             normalized["collected_date"] = timestamps.get("received_collected")
             released = timestamps.get("released", "")
-            # Extract just the date part if datetime
             if released and " " in released:
                 normalized["released_date"] = released.split(" ")[0]
             else:
                 normalized["released_date"] = released
 
+        # Also check direct fields (exams format)
+        if not normalized.get("collected_date") and test.get("received_collected"):
+            normalized["collected_date"] = test.get("received_collected")
+        if not normalized.get("released_date") and test.get("released"):
+            released = test.get("released", "")
+            if released and " " in released:
+                normalized["released_date"] = released.split(" ")[0]
+            else:
+                normalized["released_date"] = released
+
+        # Also check collection_release_info (test_name format)
+        coll_info = test.get("collection_release_info", {})
+        if coll_info:
+            if not normalized.get("collected_date"):
+                normalized["collected_date"] = coll_info.get("received_collected")
+            if not normalized.get("released_date"):
+                released = coll_info.get("released", "")
+                if released and " " in released:
+                    normalized["released_date"] = released.split(" ")[0]
+                else:
+                    normalized["released_date"] = released
+
         # Handle EKG-specific fields
-        if "parameters" in test and isinstance(test["parameters"], dict):
+        ekg_params = test.get("parameters") or test.get("electrocardiographic_parameters")
+        if ekg_params and isinstance(ekg_params, dict):
             # This is an EKG exam
             normalized["parameters"] = [
                 {"name": k, "value": v}
-                for k, v in test["parameters"].items()
+                for k, v in ekg_params.items()
             ]
             normalized["conclusion"] = test.get("conclusion")
-            normalized["morphological_description_and_comment"] = test.get("morphological_description_comment")
-            normalized["indication"] = test.get("indication")
-            normalized["medication"] = test.get("medication")
+            normalized["morphological_description_and_comment"] = (
+                test.get("morphological_description_comment")
+                or test.get("morphological_description_and_comment")
+            )
+            # Check clinical_information for indication/medication
+            clin_info = test.get("clinical_information", {})
+            normalized["indication"] = test.get("indication") or clin_info.get("indication")
+            normalized["medication"] = test.get("medication") or clin_info.get("medication")
             if test.get("lauded_by"):
                 normalized["laudado_by"] = test["lauded_by"]
 
@@ -661,6 +721,103 @@ class MedicalExamExtractor:
         elif max_val is not None:
             return f"< {max_val}"
         return None
+
+    def _normalize_polysomnography(self, polysom: dict) -> dict:
+        """
+        Normalize polysomnography data from different extraction formats.
+
+        The 'polysomnography' format (some extractions) uses nested structure:
+        - monitoring_details.equipment
+        - sleep_study_results.total_sleep_time_minutes
+        - respiratory_events.obstructive_apneas
+
+        The 'polysomnography_results' format uses flat structure:
+        - monitoring_equipment
+        - total_sleep_time_minutes
+        - respiratory_events_during_sleep.obstructive_apneas
+        """
+        # If already flat format, return as-is
+        if "monitoring_equipment" in polysom or "total_sleep_time_minutes" in polysom:
+            return polysom
+
+        normalized = {}
+
+        # Flatten monitoring_details
+        monitoring = polysom.get("monitoring_details", {})
+        if monitoring:
+            normalized["monitoring_equipment"] = monitoring.get("equipment")
+            normalized["monitoring_location"] = monitoring.get("location")
+            normalized["monitoring_start_time"] = monitoring.get("start_time")
+            normalized["monitoring_end_time"] = monitoring.get("end_time")
+            normalized["monitoring_duration_minutes"] = monitoring.get("total_monitoring_duration_minutes")
+            normalized["electrophysiological_parameters"] = monitoring.get("electrophysiological_parameters")
+
+        # Flatten sleep_study_results
+        sleep = polysom.get("sleep_study_results", {})
+        if sleep:
+            normalized["total_recording_time_minutes"] = sleep.get("total_recording_time_minutes")
+            normalized["total_sleep_time_minutes"] = sleep.get("total_sleep_time_minutes")
+            normalized["sleep_efficiency_percent"] = sleep.get("sleep_efficiency_percent")
+            normalized["sleep_latency_minutes"] = sleep.get("sleep_latency_minutes")
+            normalized["rem_sleep_latency_minutes"] = sleep.get("rem_sleep_latency_minutes")
+            normalized["wake_time_during_sleep_minutes"] = sleep.get("wakefulness_during_total_sleep_time_minutes")
+            normalized["periodic_limb_movements"] = sleep.get("periodic_limb_movements")
+
+            # Handle sleep distribution
+            dist = sleep.get("sleep_stage_distribution", {})
+            if dist:
+                normalized["sleep_distribution"] = {
+                    "n1": {"value": dist.get("stage_1_n1_percent")},
+                    "n2": {"value": dist.get("stage_2_n2_percent")},
+                    "n3": {"value": dist.get("stage_3_n3_percent")},
+                    "rem": {"value": dist.get("rem_sleep_percent")},
+                }
+
+            # Handle sleep fragmentation
+            frag = sleep.get("sleep_fragmentation", {})
+            if frag:
+                # rate must be a string
+                rate = frag.get("microarousals_per_hour")
+                normalized["sleep_fragmentation"] = {
+                    "microarousals": {
+                        "count": frag.get("microarousals"),
+                        "rate": str(rate) if rate is not None else None,
+                    },
+                    "complete_arousals": {"count": frag.get("complete_arousals")},
+                }
+
+        # Flatten respiratory_events
+        resp = polysom.get("respiratory_events", {})
+        if resp:
+            normalized["respiratory_events_during_sleep"] = {
+                "obstructive_apneas": {"count": resp.get("obstructive_apneas")},
+                "hypopneas": {"count": resp.get("hypopneas")},
+            }
+            normalized["apnea_hypopnea_index"] = {
+                "value": resp.get("global_index_events_per_hour_of_sleep"),
+                "apnea_per_hour": resp.get("apnea_per_hour"),
+                "hypopnea_per_hour": resp.get("hypopnea_per_hour"),
+            }
+            normalized["oxygen_saturation_SaO2"] = {
+                "wakefulness": resp.get("oxygen_saturation_sao2_in_wakefulness_percent"),
+                "average": resp.get("mean_sao2_percent"),
+                "minimum": resp.get("minimum_sao2_percent"),
+            }
+            normalized["snoring"] = resp.get("snoring")
+            normalized["event_position"] = resp.get("event_position")
+
+        # Flatten cardiac_information
+        cardiac = polysom.get("cardiac_information", {})
+        if cardiac:
+            normalized["average_heart_rate_bpm"] = cardiac.get("mean_heart_rate_bpm")
+            normalized["cardiac_arrhythmias"] = cardiac.get("cardiac_arrhythmias")
+
+        # Flatten observations
+        obs = polysom.get("observations", {})
+        if obs:
+            normalized["epworth_sleepiness_scale"] = obs.get("epworth_sleepiness_scale")
+
+        return normalized
 
     def format_individual_exam_proto(
         self,
@@ -695,14 +852,37 @@ class MedicalExamExtractor:
         transformer = ProtoTransformer(use_ai_classification=use_ai_classification)
 
         # Extract patient info for all exams
-        patient_info = merged_data.get("patient_info") or merged_data.get("patient_information", {})
+        # Handle different key names for patient/facility info
+        patient_info = (
+            merged_data.get("patient_info")
+            or merged_data.get("patient_information")
+            or merged_data.get("patient", {})
+        )
         patient_id = transformer.generate_patient_id(patient_info)
-        facility_info = merged_data.get("facility_info") or merged_data.get("facility_information", {})
+        facility_info = (
+            merged_data.get("facility_info")
+            or merged_data.get("facility_information")
+            or merged_data.get("facility", {})
+        )
 
-        # 1. Process exam_results[] and tests[] - individual lab tests
+        # 1. Process exam_results[], tests[], and exams[] - individual lab tests
         # Separate blood exams from other exams for grouping
-        # Check both "exam_results" and "tests" keys (different extraction formats)
-        exam_results = merged_data.get("exam_results", []) + merged_data.get("tests", [])
+        # Check all possible keys (different extraction formats)
+        # Ensure we get lists (some formats may have dicts instead)
+        def _ensure_list(val):
+            if val is None:
+                return []
+            if isinstance(val, list):
+                return val
+            if isinstance(val, dict):
+                return [val]  # wrap single dict in a list
+            return []
+
+        exam_results = (
+            _ensure_list(merged_data.get("exam_results"))
+            + _ensure_list(merged_data.get("tests"))
+            + _ensure_list(merged_data.get("exams"))
+        )
         blood_exams_by_date: dict[str, list[dict]] = {}
         other_exams: list[dict] = []
 
@@ -711,14 +891,20 @@ class MedicalExamExtractor:
                 continue
 
             # Normalize different data formats
-            # "tests" format uses "name" instead of "exam_type"
-            exam_type_raw = exam_result.get("exam_type") or exam_result.get("name", "")
+            # Different formats use "name", "exam_type", or "test_name"
+            exam_type_raw = (
+                exam_result.get("exam_type")
+                or exam_result.get("name")
+                or exam_result.get("test_name", "")
+            )
             normalized_type = transformer.normalize_exam_type(exam_type_raw)
 
             # Normalize collection date (different formats)
             collected_date = (
                 exam_result.get("collected_date")
+                or exam_result.get("received_collected")  # exams format
                 or (exam_result.get("timestamps", {}).get("received_collected"))
+                or (exam_result.get("collection_release_info", {}).get("received_collected"))  # test_name format
                 or "unknown"
             )
 
@@ -749,12 +935,19 @@ class MedicalExamExtractor:
 
             exams.append(exam)
 
-        # 2. Process polysomnography_results - sleep study
-        polysom = merged_data.get("polysomnography_results")
+        # 2. Process polysomnography_results or polysomnography - sleep study
+        polysom = merged_data.get("polysomnography_results") or merged_data.get("polysomnography")
         if polysom:
+            # Normalize polysomnography data structure
+            normalized_polysom = self._normalize_polysomnography(polysom)
+            # Get conclusions from polysom or top-level
+            conclusions = (
+                polysom.get("conclusions", [])
+                or merged_data.get("conclusions", [])
+            )
             exam = transformer.transform_polysomnography_exam(
-                polysom,
-                merged_data.get("conclusions", []),
+                normalized_polysom,
+                conclusions,
                 patient_id,
                 facility_info,
                 merged_data.get("exam_metadata", {}),
@@ -763,9 +956,11 @@ class MedicalExamExtractor:
 
         # 3. Process imaging exams (MRI, CT, X-ray, etc.) from exam_metadata/exam_details
         # Check BOTH keys since they may contain different exams
+        # Also check "results" sub-object for analysis/opinion (some formats nest them there)
+        results_obj = merged_data.get("results", {})
         imaging_sources = [
             (merged_data.get("exam_metadata", {}), merged_data.get("findings", []), merged_data.get("conclusion", [])),
-            (merged_data.get("exam_details", {}), merged_data.get("analysis", []), merged_data.get("opinion", [])),
+            (merged_data.get("exam_details", {}), merged_data.get("analysis", []) or results_obj.get("analysis", []), merged_data.get("opinion", []) or results_obj.get("opinion", [])),
         ]
 
         for exam_meta, findings, conclusion in imaging_sources:

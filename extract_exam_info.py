@@ -104,12 +104,13 @@ def main():
     )
     parser.add_argument(
         "--pdf_path",
-        default="./data",
+        default="./data/pdfs",
         type=str,
         help="Path to PDF file or directory containing PDFs"
     )
     parser.add_argument(
         "-o", "--output",
+        default="./data/extracted",
         type=str,
         help="Output JSON path (for single PDF) or directory (for batch)"
     )

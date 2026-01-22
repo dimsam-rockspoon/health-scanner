@@ -142,6 +142,23 @@ class ProtoTransformer:
             "CREATININA", "POTASSIO", "SODIO", "UREIA", "GLICOSE",
             "HEMOGRAMA", "TEMPO DE PROTROMBINA", "TEMPO DE TROMBOPLASTINA",
             "CBC", "BLOOD", "CHEMISTRY", "BIOCHEMISTRY", "COAGULATION",
+            # Hormones and metabolic tests
+            "INSULINA", "HEMOGLOBINA GLICADA", "A1C",
+            "TSH", "TIROESTIMULANTE", "T3", "T4", "TIROXINA", "TRIIODOTIRONINA",
+            "TESTOSTERONA", "CORTISOL", "SHBG", "GLOBULINA LIGADORA",
+            # Iron studies
+            "FERRO", "FERRITINA",
+            # Lipid panel
+            "COLESTEROL", "TRIGLICERID", "HDL", "LDL", "VLDL",
+            # Vitamins and minerals
+            "VITAMINA", "ACIDO URICO", "ACIDO FOLICO", "ACIDO ASCORBICO",
+            "HOMOCISTE", "CALCIO", "ZINCO", "MAGNESIO",
+            # Liver and pancreatic enzymes
+            "BILIRRUBINA", "TGO", "TGP", "FOSFATASE", "AMILASE", "LIPASE",
+            # Proteins
+            "PROTEINA", "ALBUMINA", "GLOBULINA",
+            # Other
+            "HIDROXI", "B-12", "B12",
         }
         if any(bt in exam_type_upper for bt in blood_tests):
             return "blood"
